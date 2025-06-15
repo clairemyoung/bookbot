@@ -1,0 +1,51 @@
+import sys
+
+def main():
+#    book = sys.argv[1]
+    word_count = count_words(get_book_text(book))
+    char_count = count_chars(get_book_text(book))
+    ordered_list = sorted_list(only_alpha_dict(char_count))
+    formatted_char_count = formatted_list(ordered_list)
+
+    
+#    print(char_count)
+#    print(ordered_list)
+
+    print(f"""========== BOOKBOT ==========
+    Analysing book found at {book}...
+    ---------- Word Count ---------
+    Found {word_count} total words
+    ---------- Character Count ----------
+    {formatted_char_count}
+    ========== END ==========""")
+
+if sys.argv < 2:
+    print("Usage: python3 main.py <path_to_book>")
+    sys.exit(1)
+else:
+    book = sys.argv[1]
+
+#formatted char count should iteratate over the list and add char[], :, num[], \n to string then return string
+def formatted_list(ordered_list):
+    formatted_list = ""    
+    for dictionary in ordered_list:
+        #for item in dictionary:
+        #char = dictionary[0]
+        #num = dictionary[1]
+        formatted_list = formatted_list + f"{dictionary["char"]}: {dictionary["num"]}\n"
+    return formatted_list
+
+def get_book_text(file_path):
+    with open(file_path) as f:
+        file_contents = f.read()
+        return file_contents
+
+from stats import count_chars
+from stats import only_alpha_dict
+from stats import sort_on
+from stats import sorted_list
+from stats import count_words
+
+main()
+
+
